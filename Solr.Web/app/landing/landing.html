@@ -1,0 +1,13 @@
+﻿<h1>LANDING</h1>
+
+<h2 ng-bind="title"></h2>
+
+<input type="button" value="Get cats" ng-click="test()" />
+
+<div ng-repeat="feed in allFeeds">
+    <h3>{{feed.name}}{{feed.count}}</h3>
+    <h1>{{feed.wat}}</h1>
+    <div ng-repeat="feedItem in feed.recentFeedItems">
+        <h1>TEST</h1>
+    </div>
+</div>
