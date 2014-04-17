@@ -1,27 +1,29 @@
-﻿.view-container {
-      position: relative;
+﻿  [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
   }
+body {
+    font-family: 'Sniglet', serif;
+}
+.thumbnail h5 {
+    font-size: 1.5em;
+}
+.thumbnail {
+    background-color: rgb(222, 22, 233);
+}
 
-  .view-frame.ng-enter, .view-frame.ng-leave {
-      background: white;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-  }
+.feedTitle {
+    /*margin: auto;*/
+    color: rgb(222, 22, 233);
+    font-weight: bolder;
+    font-size: larger;
+    background-color: rgb(75, 75, 75);
+    text-align: center;
+    vertical-align: middle;
+}
+.feedTitle h4 {
+    cursor: pointer;
+}
 
-  .view-frame.ng-enter {
-      -webkit-animation: 0.3s fade-in;
-      -moz-animation: 0.3s fade-in;
-      -o-animation: 0.3s fade-in;
-      animation: 0.3s fade-in;
-      z-index: 100;
-  }
 
-  .view-frame.ng-leave {
-      -webkit-animation: 0.3s fade-out;
-      -moz-animation: 0.3s fade-out;
-      -o-animation: 0.3s fade-out;
-      animation: 0.3s fade-out;
-      z-index:99;
-  }
+
+

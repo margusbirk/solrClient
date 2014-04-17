@@ -1,40 +1,61 @@
 ﻿'use strict';
 
-app.service('solrService', ['$q', solrService]);
+app.service('solrService', ['$q', 'escapeService', solrService]);
 
-function solrService($q) {
-    var baseUrl = 'http://uptsearch.cloudapp.net/solr/rss/select';
+function solrService($q, escapeService) {
     var allSourcesUrl = 'http://uptsearch.cloudapp.net/solr/rss/select?q=*%3A*&rows=0&facet=on&facet.field=source&wt=json';
-    var isResourcesLoaded;
+    var isCategoriesLoaded;
     var allSources = [];
     var services = {
         getAllResourceCategories: getAllResourceCategories,
-        getLatestForCategory: getLatestForCategory
+        getLatestForCategory: getLatestForCategory,
+        getNewsItemByUrl: getNewsItemByUrl
     };
     return services;
 
-    function getAllResourceCategories() {
-        if (isResourcesLoaded) {
-            console.log("List of categories already obtained, returning");
-            return allSources;
-        };
+    function getNewsItemByUrl(newsItemUrl) {
         var defer = $q.defer();
+        var escapedUrl = escapeService.escapeSolrSpecialChars(newsItemUrl);
+        var url = "http://uptsearch.cloudapp.net/solr/rss/select?q=link:"+escapedUrl+"&wt=json&rows=1";
+        console.log('GET ' + url);
+        $.ajax({ url: url, method: "get", dataType: "jsonp", jsonp: "json.wrf" })
+            .success(querySuccess)
+            .error(_queryFailed);
+
+        function querySuccess(data) {
+            if (data.response.numFound == 1) {
+                console.log(data.response.docs[0]);
+                defer.resolve(data.response.docs[0]);
+            } else {
+                defer.reject();
+            }
+        }
+        return defer.promise;
+    };
+
+    function getAllResourceCategories() {
+        //Todo: queryfailed local scope
+        var defer = $q.defer();
+        if (isCategoriesLoaded) {
+            console.log("List of categories already obtained, returning");
+            defer.resolve(allSources);
+            return defer.promise;
+        };
         var allFeeds = [];
         $.ajax({
             url: allSourcesUrl,
             method: 'get',
             dataType: 'jsonp',
             jsonp: 'json.wrf'
-        }).then(querySuccess);
-            //.success(querySuccess).error(_queryFailed);
+        }).success(querySuccess).error(_queryFailed);
 
         function querySuccess(data) {
-            //Siin tuleb response mitte [{name:name, count:count}] vaid [name, count, name, count] 
+            //Siin tuleb response mitte [{name:name, count:count}] vaid [name1, count1, name2, count2] 
             var allCats = data.facet_counts.facet_fields.source;
             for (var i = 0; i < allCats.length; i += 2) {
                 allFeeds.push({ name: allCats[i], count: allCats[i + 1] });
             }
-            isResourcesLoaded = true;
+            isCategoriesLoaded = true;
             allSources = allFeeds;
             defer.resolve(allFeeds);
         }
@@ -50,7 +71,7 @@ function solrService($q) {
             return;
         }
         var defer = $q.defer();
-        var url = "http://uptsearch.cloudapp.net/solr/rss/select?q=source:"+categoryName+"&wt=json&indent=true&sort=date%20asc&rows="+limit;
+        var url = "http://uptsearch.cloudapp.net/solr/rss/select?q=source:"+categoryName+"&wt=json&sort=date%20desc&rows="+limit;
         console.log('GET ' + url);
         $.ajax({ url: url, method: "get", dataType: "jsonp", jsonp: "json.wrf" }).then(querySuccess);
 
@@ -58,12 +79,10 @@ function solrService($q) {
             var list = data.response.docs;
             defer.resolve(list);
         }
-
         return defer.promise;
     }
 
     function _queryFailed(data, status) {
        console.log("Error status: "  + status + " data: " + data);
-       
    }
 }

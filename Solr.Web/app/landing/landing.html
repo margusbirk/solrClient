@@ -1,13 +1,22 @@
-﻿<h1>LANDING</h1>
+﻿<h2 ng-bind="title"></h2>
+<div class="input-group">
+    <span class="input-group-addon">Search</span>
+    <input type="text" class="form-control" placeholder="Filter the feeds" ng-model="query" />
+</div>
 
-<h2 ng-bind="title"></h2>
-
-<input type="button" value="Get cats" ng-click="test()" />
-
-<div ng-repeat="feed in allFeeds">
-    <h3>{{feed.name}}{{feed.count}}</h3>
-    <h1>{{feed.wat}}</h1>
-    <div ng-repeat="feedItem in feed.recentFeedItems">
-        <h1>TEST</h1>
+<div>
+    <div class="repeated-item" ng-repeat="feed in allFeeds | filter:query" >
+        <div class="feedTitle">
+            <h4 ng-click="navigateToFeed(feed.name)">{{feed.name | uppercase}}<span class="badge"  ng-bind="feed.count"></span></h4>
+        </div>
+        <div class="row">
+            <div ng-repeat="feedItem in feed.recentFeedItems | filter: query" class="col-md-4 repeated-item">
+                <div class="thumbnail">
+                    <h5 ng-bind="feedItem.title"></h5>
+                    <h5 ng-bind="feedItem.date | date:'yyyy-MM-dd HH:mm:ss'"></h5>
+                    <input type="button" ng-click="navigateToSpecific(feedItem.link)" class="btn btn-default btn-sm" value="Continue reading" />
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -8,8 +8,16 @@ app.config(['$routeProvider',
             when('/landing', {
                 templateUrl: 'app/landing/landing.html',
                 controller: 'landingController'
-            }).
-            otherwise({
-                redirectTo: '/landing'
+            })
+            .when('/feed', {
+                templateUrl: 'app/feed/feed.html',
+                controller: 'feedController'
+            })
+            .when('/feeditem', {
+                templateUrl: 'app/feeditem/feeditem.html',
+                controller: 'feeditemController'
             });
+        //.otherwise({
+        //    redirectTo: '/reroutecatch'
+        //});
     }]);

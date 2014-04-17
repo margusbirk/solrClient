@@ -1,14 +1,22 @@
 ﻿<!DOCTYPE html>
-<html ng-app="app">
-<head>
-    <title>Search feed</title>
-</head>
+<html ng-app="app" ng-cloak>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Solr Feed</title>
+        <link href='http://fonts.googleapis.com/css?family=Sniglet' rel='stylesheet' type='text/css'>
+        <link href="Content/bootstrap.css" rel="stylesheet" />
+        <link href="Content/Site.css" rel="stylesheet" />
+        <link href="Content/ngAnimate.css" rel="stylesheet" />
+    </head>
 <body>
-    <h1>Header</h1>
-    <div class="view-container">
-        <div ng-view class="view-frame"></div>
+    <div class="container">
+        <div ng-include="'/app/navbar/navbar.html'"></div>
+        <div class="view-container">
+            <div ng-view class="view-frame"></div>
+        </div>
     </div>
-
+    
+    
     <script src="Scripts/jquery-2.1.0.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="Scripts/Angular/angular.js"></script>
@@ -16,6 +24,9 @@
     <script src="Scripts/Angular/angular-animate.js"></script>
     <script src="app/app.js"></script>
     <script src="app/landing/landingController.js"></script>
+    <script src="app/feed/feedController.js"></script>
+    <script src="app/feeditem/feeditemController.js"></script>
     <script src="app/services/solrService.js"></script>
+    <script src="app/services/escapeService.js"></script>
 </body>
 </html>

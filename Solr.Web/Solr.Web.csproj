@@ -66,13 +66,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\feeditem\feeditem.html" />
+    <Content Include="app\feeditem\feeditemController.js" />
+    <Content Include="app\feed\feedController.js" />
+    <Content Include="app\feed\feed.html" />
     <Content Include="app\landing\landing.html" />
     <Content Include="app\landing\landingController.js" />
+    <Content Include="app\navbar\navbar.html" />
     <Content Include="app\services\solrService.js" />
+    <Content Include="app\services\escapeService.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ngAnimate.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Index.html" />
@@ -97,6 +104,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

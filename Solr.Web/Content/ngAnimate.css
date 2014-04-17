@@ -1,0 +1,152 @@
+﻿
+  /*We're using CSS transitions for when*/
+  /*the enter and move events are triggered*/
+  /*for the element that has the .repeated-item*/
+  /*class*/
+  [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+  }
+
+
+.repeated-item.ng-enter, .repeated-item.ng-move {
+    -webkit-transition:0.5s linear all;
+    -moz-transition:0.5s linear all;
+    -o-transition:0.5s linear all;
+    transition:0.5s linear all;
+    opacity:0;
+}
+
+
+ /*The ng-enter-active and ng-move-active*/
+ /*are where the transition destination properties*/
+ /*are set so that the animation knows what to*/
+ /*animate.*/
+
+.repeated-item.ng-enter.ng-enter-active,
+.repeated-item.ng-move.ng-move-active {
+    opacity:1;
+}
+
+
+  /*We're using CSS keyframe animations for when*/
+  /*the leave event is triggered for the element*/
+  /*that has the .repeated-item class*/
+
+.repeated-item.ng-leave {
+    -webkit-animation:0.5s my_animation;
+    -moz-animation:0.5s my_animation;
+    -o-animation:0.5s my_animation;
+    animation:0.5s my_animation;
+}
+
+@keyframes my_animation {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+
+  /*Unfortunately each browser vendor requires*/
+  /*its own definition of keyframe animation code...*/
+
+@-webkit-keyframes my_animation {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+@-moz-keyframes my_animation {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+@-o-keyframes my_animation {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+.repeated-item.ng-enter-stagger,
+.repeated-item.ng-leave-stagger,
+.repeated-item.ng-move-stagger {
+    /* 200ms will be applied between each sucessive enter operation */
+    -webkit-transition-delay:0.2s;
+    transition-delay:0.2s;
+}
+
+.repeated-item.ng-enter,
+.repeated-item.ng-leave,
+.repeated-item.ng-move {
+    -webkit-transition:0.5s linear all;
+    transition:0.5s linear all;
+}
+
+.repeated-item.ng-leave.ng-leave-active,
+.repeated-item.ng-enter,
+.repeated-item.ng-move {
+    -webkit-transition:0.5s linear all;
+    transition:0.5s linear all;
+
+    opacity:0;
+    /*line-height:0;*/
+}
+
+.repeated-item.ng-leave,
+.repeated-item.ng-move.ng-move-active,
+.repeated-item.ng-enter.ng-enter-active {
+    opacity:1;
+    /*line-height:20px;*/
+}
+
+  .view-container {
+      position: relative;
+  }
+
+  .view-frame.ng-enter, .view-frame.ng-leave {
+      background: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+  }
+
+  .view-frame.ng-enter {
+      -webkit-animation: 0.3s fade-in;
+      -moz-animation: 0.3s fade-in;
+      -o-animation: 0.3s fade-in;
+      animation: 0.3s fade-in;
+      z-index: 100;
+  }
+
+  .view-frame.ng-leave {
+      -webkit-animation: 0.3s fade-out;
+      -moz-animation: 0.3s fade-out;
+      -o-animation: 0.3s fade-out;
+      animation: 0.3s fade-out;
+      z-index:99;
+  }
+
+  @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+  @-moz-keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+  @-webkit-keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+
+  @keyframes fade-out {
+      from { opacity: 1; }
+      to { opacity: 0; }
+  }
+  @-moz-keyframes fade-out {
+      from { opacity: 1; }
+      to { opacity: 0; }
+  }
+  @-webkit-keyframes fade-out {
+      from { opacity: 1; }
+      to { opacity: 0; }
+  }
+
+  /* don't forget about the vendor-prefixes! */
