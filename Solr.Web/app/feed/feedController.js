@@ -35,14 +35,7 @@ function feedController($scope, $location, solrService) {
         }
     };
     function handleResult(data) {
-        console.log("----------handleResult-------------");
-        console.log(data);
-        console.log(data.numFound);
-        console.log(data.start);
         $scope.feed = data.docs;
         $scope.feedMeta = { numFound: data.numFound, start: data.start };
-        console.log($scope.feedMeta);
-        console.log("----------handleResult-------------");
-
     };
 }
