@@ -9,7 +9,6 @@ function landingController($scope, $location, solrService) {
     $scope.navigateToFeed = navigateToFeed;
     $scope.navigateToSpecific = navigateToSpecific;
 
-
     activate();
 
     function activate() {

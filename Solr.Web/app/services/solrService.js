@@ -3,7 +3,6 @@
 app.service('solrService', ['$q', 'escapeService', solrService]);
 
 function solrService($q, escapeService) {
-    var allSourcesUrl = 'http://uptsearch.cloudapp.net/solr/rss/select?q=*%3A*&rows=0&facet=on&facet.field=source&wt=json';
     var isCategoriesLoaded;
     var allSources = [];
     var services = {
@@ -14,9 +13,9 @@ function solrService($q, escapeService) {
     };
     return services;
 
-    function getFeedByName(feedName) {
+    function getFeedByName(query) {
         var defer = $q.defer();
-        var url = "http://uptsearch.cloudapp.net/solr/rss/select?q=source:" + feedName + "&wt=json&rows=9&sort=date desc&fl=title,link,date";
+        var url = "http://uptsearch.cloudapp.net/solr/rss/select?q=source:" + query.feedName + "&wt=json&start="+query.start+"&rows=9&sort=date desc&fl=title,link,date";
         console.log("GET " + url);
         $.ajax({ url: url, method: "get", dataType: 'jsonp', jsonp: 'json.wrf' })
             .success(querySuccess).fail(queryFailed);
@@ -54,6 +53,7 @@ function solrService($q, escapeService) {
     };
 
     function getAllResourceCategories() {
+        var allSourcesUrl = 'http://uptsearch.cloudapp.net/solr/rss/select?q=*%3A*&rows=0&facet=on&facet.field=source&wt=json';
         var defer = $q.defer();
         if (isCategoriesLoaded) {
             console.log("List of categories already obtained, returning");
@@ -85,13 +85,6 @@ function solrService($q, escapeService) {
     }
 
     function getLatestForCategory(categoryName, limit) {
-        if (typeof (limit) === "undefined") {
-            limit = 3;
-        }
-        if (typeof (categoryName) == "undefined") {
-            console.log("categoryName missing, cannot continue");
-            return;
-        }
         var defer = $q.defer();
         var url = "http://uptsearch.cloudapp.net/solr/rss/select?q=source:" + categoryName + "&wt=json&fl=link title date&sort=date%20desc&rows=" + limit;
         console.log('GET ' + url);
