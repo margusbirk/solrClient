@@ -7,16 +7,22 @@ body {
 .thumbnail h5 {
     font-size: 1.5em;
 }
-.thumbnail {
-    background-color: rgb(222,120,233);
-}
 .test {
     background-color: rgb(22,233,44);
+}
+.center {
+    float: none;
+    margin: 0 auto;
 }
 .clearboth {
     clear: both;
 }
-
+.vertical30 {
+    min-height: 30px;
+}
+.pointer {
+    cursor: pointer;
+}
 .list-column {
     background-color:rgb(222, 120, 233);
     margin: 6px;
@@ -40,9 +46,7 @@ body {
     text-align: center;
     /*vertical-align: middle;*/
 }
-.feedTitle h4 {
-    cursor: pointer;
-}
+
 
 
 

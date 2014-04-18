@@ -6,7 +6,7 @@
 
 <div class="repeated-item" ng-repeat="feed in allFeeds | filter:query">
     <div class="feedTitle">
-        <h4 ng-click="navigateToFeed(feed.name)">{{feed.name | uppercase}}<span class="badge" ng-bind="feed.count"></span></h4>
+        <h4 class="pointer" ng-click="navigateToFeed(feed.name)">{{feed.name | uppercase}}<span class="badge" ng-bind="feed.count"></span></h4>
     </div>
     <div ng-repeat="feedItem in feed.recentFeedItems | filter: query" class="repeated-item">
         <div class="list-column">

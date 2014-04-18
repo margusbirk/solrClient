@@ -1,16 +1,24 @@
 ﻿
 <div class="input-group">
     <span class="input-group-addon">Search</span>
-    <input type="text" class="form-control" placeholder="Filter the feeds" ng-model="query" />
+    <input type="text" class="form-control" placeholder="Filter the feeds" ng-model="query.title" />
 </div>
 
 <div class="feedTitle">
     <h4>{{feedName | uppercase}}<span class="badge" ng-bind="feed.length"></span></h4>
 </div>
+<h4 ng-bind="feedMeta.start"></h4>
+<div class="container">
+    <div class="center col-md-2">
+        <input type="button" ng-click="loadFeedItems(feedMeta.start, feedMeta.numFound, false)" ng-disabled="feedMeta.start<1" class="btn btn-default btn-sm" value="Previous" />
+        <input type="button" ng-click="loadFeedItems(feedMeta.start, feedMeta.numFound, true)" class="btn btn-default btn-sm" value="Next" />
+    </div>
+</div>
+
 <div ng-repeat="feedItem in feed | filter: query" class="repeated-item">
     <div class="list-column">
         <h5 ng-bind="feedItem.title"></h5>
         <h5 ng-bind="feedItem.date | date:'yyyy-MM-dd HH:mm:ss'"></h5>
-        <input type="button" ng-click="navigateToSpecific(feedItem.link)" class="btn btn-default btn-sm specialButton" value="Continue reading" />
+        <input type="button" ng-click="navigateToSpecific(feedItem.link)" class="btn btn-default btn-sm" value="Continue reading" />
     </div>
 </div>
