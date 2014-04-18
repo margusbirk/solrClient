@@ -1,14 +1,16 @@
-﻿<div>
-    <h1 ng-bind="title"></h1>
-    <div class="row">
-        <div class="col-xs-4">
-            <div class="thumbnail"></div>
-        </div>
-        <div class="col-xs-4">
-            <div class="thumbnail"></div>
-        </div>
-        <div class="col-xs-4">
-            <div class="thumbnail"></div>
-        </div>
+﻿
+<div class="input-group">
+    <span class="input-group-addon">Search</span>
+    <input type="text" class="form-control" placeholder="Filter the feeds" ng-model="query" />
+</div>
+
+<div class="feedTitle">
+    <h4>{{feedName | uppercase}}<span class="badge" ng-bind="feed.length"></span></h4>
+</div>
+<div ng-repeat="feedItem in feed | filter: query" class="repeated-item">
+    <div class="list-column">
+        <h5 ng-bind="feedItem.title"></h5>
+        <h5 ng-bind="feedItem.date | date:'yyyy-MM-dd HH:mm:ss'"></h5>
+        <input type="button" ng-click="navigateToSpecific(feedItem.link)" class="btn btn-default btn-sm specialButton" value="Continue reading" />
     </div>
 </div>

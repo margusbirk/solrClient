@@ -4,19 +4,17 @@
     <input type="text" class="form-control" placeholder="Filter the feeds" ng-model="query" />
 </div>
 
-<div>
-    <div class="repeated-item" ng-repeat="feed in allFeeds | filter:query" >
-        <div class="feedTitle">
-            <h4 ng-click="navigateToFeed(feed.name)">{{feed.name | uppercase}}<span class="badge"  ng-bind="feed.count"></span></h4>
-        </div>
-        <div class="row">
-            <div ng-repeat="feedItem in feed.recentFeedItems | filter: query" class="col-md-4 repeated-item">
-                <div class="thumbnail">
-                    <h5 ng-bind="feedItem.title"></h5>
-                    <h5 ng-bind="feedItem.date | date:'yyyy-MM-dd HH:mm:ss'"></h5>
-                    <input type="button" ng-click="navigateToSpecific(feedItem.link)" class="btn btn-default btn-sm" value="Continue reading" />
-                </div>
-            </div>
+<div class="repeated-item" ng-repeat="feed in allFeeds | filter:query">
+    <div class="feedTitle">
+        <h4 ng-click="navigateToFeed(feed.name)">{{feed.name | uppercase}}<span class="badge" ng-bind="feed.count"></span></h4>
+    </div>
+    <div ng-repeat="feedItem in feed.recentFeedItems | filter: query" class="repeated-item">
+        <div class="list-column">
+            <h5 ng-bind="feedItem.title"></h5>
+            <h5 ng-bind="feedItem.date | date:'yyyy-MM-dd HH:mm:ss'"></h5>
+            <input type="button" ng-click="navigateToSpecific(feedItem.link)" class="btn btn-default btn-sm" value="Continue reading" />
         </div>
     </div>
+    <div class="clearboth"></div>
 </div>
+

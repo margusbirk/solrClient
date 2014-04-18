@@ -28,7 +28,7 @@ function landingController($scope, $location, solrService) {
     }
 
     function loadFeedItems() {
-        //testimise käigus teeme ainult ühe päringu
+        //testimise käigus ainult 1 päring
         //solrService.getLatestForCategory($scope.allFeeds[0].name, 3).then(function (data) {
         //    $scope.allFeeds[0].recentFeedItems = data;
         //});
